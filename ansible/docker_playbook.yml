@@ -1,0 +1,26 @@
+- name: Instalar Docker y ejecutar comando Docker
+  hosts: tu_servidor
+  become: yes  # Ejecutar tareas con privilegios de superusuario
+
+  tasks:
+    - name: Actualizar caché de paquetes
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'  # Ajusta según la distribución de tu sistema
+
+    - name: Instalar paquetes necesarios
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - docker.io
+
+    - name: Iniciar y habilitar el servicio Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Ejecutar comando Docker
+      command: "docker run -p 80:8000 99072010120/tenpo"
