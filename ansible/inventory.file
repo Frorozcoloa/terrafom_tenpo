@@ -1,0 +1,6 @@
+[vmprod]
+35.224.26.106
+
+[vmprod:vars]
+ansible_ssh_user=froro
+ansible_ssh_common_args='-F ssh_vmprod.cfg'

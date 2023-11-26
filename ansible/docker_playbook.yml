@@ -1,5 +1,5 @@
 - name: Instalar Docker y ejecutar comando Docker
-  hosts: tu_servidor
+  hosts: all
   become: yes  # Ejecutar tareas con privilegios de superusuario
 
   tasks:
@@ -23,4 +23,4 @@
         enabled: yes
 
     - name: Ejecutar comando Docker
-      command: "docker run -p 80:8000 99072010120/tenpo"
+      command: "docker run -p {{ port }}:80 -d {{ docker_image }}"

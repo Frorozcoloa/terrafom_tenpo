@@ -28,7 +28,7 @@ resource  "google_compute_firewall" "ssh" {
     protocol = "tcp"
     ports = ["22"]
   }
-  source_ranges = [var.ssh_ip]
+  source_ranges = [var.ip_range]
 }
 
 resource "google_compute_firewall" "http" {
