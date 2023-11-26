@@ -1,6 +1,12 @@
 variable "project" { 
 }
 
+variable "ssh_ip" {
+
+}
+variable "ip_range" {
+  default = "0.0.0.0/0"
+}
 variable "credentials_file" { 
 }
 
