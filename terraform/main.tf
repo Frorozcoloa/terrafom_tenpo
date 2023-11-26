@@ -10,6 +10,7 @@ resource "google_compute_instance" "vm_instance" {
     initialize_params {
       image = var.image
     }
+    
   }
 
   network_interface {
@@ -17,6 +18,7 @@ resource "google_compute_instance" "vm_instance" {
     access_config {
     }
   }
+  tags = ["http-server", "ssh"]
 }
 
 resource  "google_compute_firewall" "ssh" {
