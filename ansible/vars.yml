@@ -1,2 +1,4 @@
-docker_image: "99072010120/tenpo"
-port: 80
+default_container_name: tenpo-app
+default_container_port: 80
+default_container_image: 99072010120/tenpo
+default_container_command: sleep 1d
