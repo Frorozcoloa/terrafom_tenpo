@@ -71,19 +71,54 @@ terraform apply
 
    1. Realiza pruebas en el modelo para asegurarte de que funcione correctamente en la nueva infraestructura.
    2. **Volver a un Commit Anterior en Git:**
+
       * Utiliza Git para volver a un commit anterior que refleje la última versión estable de la infraestructura. Puedes hacer esto mediante el comando `git checkout` seguido del hash del commit al que deseas volver.
    3. Utiliza Git para volver a un commit anterior que refleje la última versión estable de la infraestructura. Puedes hacer esto mediante el comando `git checkout` seguido del hash del commit al que deseas volver.
    4. **Aplicar la Infraestructura desde la Versión Anterior:**
+
       * Utiliza Terraform para aplicar la configuración de infraestructura desde la versión específica del código. Esto puede implicar ejecutar comandos como `terraform apply` después de retroceder en Git.
    5. Utiliza Terraform para aplicar la configuración de infraestructura desde la versión específica del código. Esto puede implicar ejecutar comandos como `terraform apply` después de retroceder en Git.
    6. **Validación Post-Rollback:**
+
       * Realiza pruebas y validaciones para asegurarte de que la infraestructura se haya restaurado correctamente y que la aplicación esté en un estado funcional. Esto puede incluir pruebas manuales y/o automatizadas.
    7. Realiza pruebas y validaciones para asegurarte de que la infraestructura se haya restaurado correctamente y que la aplicación esté en un estado funcional. Esto puede incluir pruebas manuales y/o automatizadas.
    8. **Notificar del Incidente:**
+
       * Notifica al equipo relevante sobre el rollback y los problemas encontrados durante la implementación. Proporciona detalles sobre la causa del rollback, las acciones tomadas y cualquier impacto en el sistema.
       * Puedes utilizar herramientas de comunicación interna o un sistema de gestión de incidentes para asegurarte de que todos los miembros del equipo estén informados.
    9. Notifica al equipo relevante sobre el rollback y los problemas encontrados durante la implementación. Proporciona detalles sobre la causa del rollback, las acciones tomadas y cualquier impacto en el sistema.
    10. Puedes utilizar herramientas de comunicación interna o un sistema de gestión de incidentes para asegurarte de que todos los miembros del equipo estén informados.
    11. **Análisis Post-Rollback:**
+
        * Realiza un análisis post-rollback para comprender las razones detrás del problema durante la implementación. Esto puede ayudar a prevenir problemas similares en el futuro y mejorar los procesos de despliegue.
    12. Realiza un análisis post-rollback para comprender las razones detrás del problema durante la implementación. Esto puede ayudar a prevenir problemas similares en el futuro y mejorar los procesos de despliegue.
+
+       ## Uso de este servidor
+
+       *Optimización del Uso de Terraform y Ansible con un Servidor Bastión**
+
+
+       1. **Servidor Bastión:**
+          * Configurar un servidor bastión en la misma red que albergará Terraform.
+          * Instalar Terraform en el servidor bastión para centralizar el servicio de despliegue desde este punto.
+       2. **Conexión Segura:**
+          * Utilizar una única clave `.pem` para conexiones seguras desde el servidor bastión.
+          * Restringir el acceso a través de medidas de seguridad como firewalls y configuraciones de red.
+       3. **Repositorios Privados:**
+          * Establecer un repositorio privado para almacenar los scripts de Terraform y Ansible.
+          * Separar el repositorio para el seguimiento específico de la infraestructura, facilitando la gestión y el versionado.
+       4. **Uso de Terraform:**
+          * Desarrollar scripts de Terraform para la definición de la infraestructura, optimizando recursos y asegurando la consistencia.
+          * Utilizar módulos de Terraform para modularizar y reutilizar código.
+          * Integrar variables y secretos de forma segura en el despliegue.
+       5. **Uso de Ansible:**
+          * Configurar Ansible para realizar tareas de aprovisionamiento en servidores.
+          * Agregar pruebas de integración en Ansible para verificar la correcta configuración y despliegue de servicios.
+          * Incluir test específicos para validar la estructura de salida del modelo y su comportamiento con el código desplegado.
+       6. **Traqueo de la Infraestructura:**
+          * Utilizar herramientas de seguimiento como Terraform Cloud o cualquier solución de seguimiento preferida para el repositorio de Terraform.
+          * Integrar informes de estado de la infraestructura directamente en flujos de trabajo de CI/CD para mantener un monitoreo constante.
+       7. **Gestión de Secretos:**
+          * Utilizar herramientas de gestión de secretos, como Vault, para manejar información sensible de manera segura y distribuida.
+       8. **Documentación Clara:**
+          * Mantener una documentación clara y detallada de los scripts de Terraform y Ansible para facilitar futuras implementaciones y colaboración.
