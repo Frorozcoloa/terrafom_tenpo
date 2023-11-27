@@ -18,18 +18,17 @@ Para el siguiente trabajo, se hizo un código en terraform donde se montó una i
 
 ```
 
-
 * **terraform:** Contiene los archivos de configuración de Terraform para la infraestructura en GCP.
 * **ansible:** Incluye los archivos de configuración de Ansible para el flujo de puesta en funcionamiento del sistema.
 * **README.md:** Documentación del proyecto.
 
-## CD
+# CD
 
 Despliegue Continuo con Imagen Docker
 
 Este proyecto sigue un enfoque de desarrollo continuo, donde se ha implementado un flujo de CI/CD para publicar una imagen de Docker lista para su uso. Es importante destacar que la imagen requiere la provisión de archivos `.env` para su ejecución.
 
-## Descripción del Flujo
+Descripción del Flujo
 
 1. **CI (Integración Continua):** Se ha configurado un sistema de integración continua que, tras cada cambio en el repositorio, automatiza la construcción y publicación de la imagen Docker. Esto garantiza que siempre se cuente con una versión actualizada y lista para su implementación.
 2. **Imagen Docker:** La imagen Docker generada durante el proceso de CI contiene los componentes necesarios para ejecutar la aplicación. Sin embargo, es crucial proporcionar los archivos de configuración `.env` para que la imagen funcione correctamente.
@@ -54,4 +53,37 @@ terraform apply
 
    Es importante destacar que, debido al alcance del proyecto, no se consideró necesario utilizar máquinas grandes. Además, dentro de las configuraciones de Ansible, se realiza manualmente la configuración del host, tomando como bastión la propia computadora del usuario. En un entorno de producción, se recomienda utilizar un bastión con las direcciones IP privadas de todas las máquinas. Importante que desde la carpeta ansible se encuentre el archivo `.env`
 
-   En Ansible ya está configurado en descargar la ultima imagen de docker [99072010120/tenpo](https://hub.docker.com/repository/docker/99072010120/tenpo/general), que es la imagen de repositorio
+   En Ansible ya está configurado en descargar la ultima imagen de docker [99072010120/tenpo](https://hub.docker.com/repository/docker/99072010120/tenpo/general), que es la imagen de repositorio.
+
+   ## Runbook: Despliegue de Infraestructura en GCP con Terraform y Ansible:
+
+
+   1. **Preparación del Entorno:**
+      * Dirígete a la máquina donde se encuentra instalado Terraform y Ansible.
+   2. **Despliegue de Nueva Infraestructura en GCP:**
+      * Utiliza Terraform para ajustar la infraestructura, agregando más GPU y recursos de cómputo según sea necesario.
+   3. **Actualización de IPs en Ansible:**
+      * Si estás utilizando una red privada (VPC), actualiza las direcciones IP en Ansible. Asigna las direcciones IP privadas de los servicios.
+   4. **Ejecución de Ansible en la Infraestructura:**
+      * Utiliza Ansible para implementar las configuraciones y actualizaciones necesarias en la infraestructura. **Pruebas del Modelo:**
+
+   ### **Rollback:**
+
+   1. Realiza pruebas en el modelo para asegurarte de que funcione correctamente en la nueva infraestructura.
+   2. **Volver a un Commit Anterior en Git:**
+      * Utiliza Git para volver a un commit anterior que refleje la última versión estable de la infraestructura. Puedes hacer esto mediante el comando `git checkout` seguido del hash del commit al que deseas volver.
+   3. Utiliza Git para volver a un commit anterior que refleje la última versión estable de la infraestructura. Puedes hacer esto mediante el comando `git checkout` seguido del hash del commit al que deseas volver.
+   4. **Aplicar la Infraestructura desde la Versión Anterior:**
+      * Utiliza Terraform para aplicar la configuración de infraestructura desde la versión específica del código. Esto puede implicar ejecutar comandos como `terraform apply` después de retroceder en Git.
+   5. Utiliza Terraform para aplicar la configuración de infraestructura desde la versión específica del código. Esto puede implicar ejecutar comandos como `terraform apply` después de retroceder en Git.
+   6. **Validación Post-Rollback:**
+      * Realiza pruebas y validaciones para asegurarte de que la infraestructura se haya restaurado correctamente y que la aplicación esté en un estado funcional. Esto puede incluir pruebas manuales y/o automatizadas.
+   7. Realiza pruebas y validaciones para asegurarte de que la infraestructura se haya restaurado correctamente y que la aplicación esté en un estado funcional. Esto puede incluir pruebas manuales y/o automatizadas.
+   8. **Notificar del Incidente:**
+      * Notifica al equipo relevante sobre el rollback y los problemas encontrados durante la implementación. Proporciona detalles sobre la causa del rollback, las acciones tomadas y cualquier impacto en el sistema.
+      * Puedes utilizar herramientas de comunicación interna o un sistema de gestión de incidentes para asegurarte de que todos los miembros del equipo estén informados.
+   9. Notifica al equipo relevante sobre el rollback y los problemas encontrados durante la implementación. Proporciona detalles sobre la causa del rollback, las acciones tomadas y cualquier impacto en el sistema.
+   10. Puedes utilizar herramientas de comunicación interna o un sistema de gestión de incidentes para asegurarte de que todos los miembros del equipo estén informados.
+   11. **Análisis Post-Rollback:**
+       * Realiza un análisis post-rollback para comprender las razones detrás del problema durante la implementación. Esto puede ayudar a prevenir problemas similares en el futuro y mejorar los procesos de despliegue.
+   12. Realiza un análisis post-rollback para comprender las razones detrás del problema durante la implementación. Esto puede ayudar a prevenir problemas similares en el futuro y mejorar los procesos de despliegue.
