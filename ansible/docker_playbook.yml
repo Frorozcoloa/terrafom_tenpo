@@ -41,7 +41,10 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
-
+    - name: Copy .env file
+      copy:
+        src: local/.env  # Ruta local del archivo .env
+        dest: app/.env  # Ruta remota en el servidor
     - name: Pull default Docker image
       community.docker.docker_image:
         name: "{{ default_container_image }}"
@@ -53,5 +56,7 @@
         image: "{{ default_container_image }}"
         ports:
         - "80:80"
+        volumes:
+        - ".:/app"
         restart_policy: always
-
+    
