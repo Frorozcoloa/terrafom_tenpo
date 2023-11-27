@@ -49,7 +49,9 @@
 
     - name: Create default containers
       community.docker.docker_container:
-        name: "{{ default_container_name }}{{ item }}"
+        name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
-        exposed_ports: "{{ default_container_port }}"
-        state: present
+        ports:
+        - "80:80"
+        restart_policy: always
+
